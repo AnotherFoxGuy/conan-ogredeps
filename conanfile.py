@@ -17,13 +17,10 @@ class OgredepsConan(ConanFile):
 
     def source(self):
         tools.get("https://bitbucket.org/cabalistic/ogredeps/get/019e46bf5ce0.zip")
-        # This small hack might be useful to guarantee proper /MT /MD linkage
-        # in MSVC if the packaged project doesn't have variables to set it
-        # properly
-#        tools.replace_in_file("hello/CMakeLists.txt", "PROJECT(MyHello)",
-#                              '''PROJECT(MyHello)
-#include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-#conan_basic_setup()''')
+        tools.replace_in_file("cabalistic-ogredeps-019e46bf5ce0/src/CMakeLists.txt",
+        'if (WIN32 OR (APPLE AND NOT OGRE_BUILD_PLATFORM_APPLE_IOS))',
+        'if (FALSE)')
+
 
     def build(self):
         cmake = CMake(self)
@@ -37,7 +34,6 @@ class OgredepsConan(ConanFile):
 
     def package(self):
         cmake = CMake(self)
-        cmake.configure(source_folder="cabalistic-ogredeps-019e46bf5ce0")
         cmake.install()
 
     def package_info(self):

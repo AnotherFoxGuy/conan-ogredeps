@@ -20,6 +20,11 @@ class OgredepsConan(ConanFile):
         tools.replace_in_file("cabalistic-ogredeps-019e46bf5ce0/src/CMakeLists.txt",
         'if (WIN32 OR (APPLE AND NOT OGRE_BUILD_PLATFORM_APPLE_IOS))',
         'if (FALSE)')
+        tools.replace_in_file("cabalistic-ogredeps-019e46bf5ce0/src/CMakeLists.txt",
+        'set(CMAKE_DEBUG_POSTFIX "_d")',
+        '# No')
+
+
 
 
     def build(self):

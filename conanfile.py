@@ -3,7 +3,7 @@ from conans.tools import os_info, SystemPackageTool
 
 class OgredepsConan(ConanFile):
     name = "OGREdeps"
-    version = "2018-07"
+    version = "2019-04"
     url = "https://github.com/AnotherFoxGuy/conan-ogredeps"
     description = "This package is provided as a quick route to compile the core dependencies of OGRE (http://www.ogre3d.org) on most supported platforms."
     settings = "os", "compiler", "build_type", "arch"
@@ -16,16 +16,10 @@ class OgredepsConan(ConanFile):
                 installer.install("libx11-dev")
 
     def source(self):
-        tools.get("https://bitbucket.org/cabalistic/ogredeps/get/019e46bf5ce0.zip")
-        tools.replace_in_file("cabalistic-ogredeps-019e46bf5ce0/src/CMakeLists.txt",
+        tools.get("https://bitbucket.org/cabalistic/ogredeps/get/dbf4f822eb78.zip")
+        tools.replace_in_file("cabalistic-ogredeps-dbf4f822eb78/src/CMakeLists.txt",
         'if (WIN32 OR (APPLE AND NOT OGRE_BUILD_PLATFORM_APPLE_IOS))',
         'if (FALSE)')
-        tools.replace_in_file("cabalistic-ogredeps-019e46bf5ce0/src/CMakeLists.txt",
-        'set(CMAKE_DEBUG_POSTFIX "_d")',
-        '# No')
-
-
-
 
     def build(self):
         cmake = CMake(self)
@@ -34,7 +28,7 @@ class OgredepsConan(ConanFile):
         cmake.definitions['OGREDEPS_BUILD_RAPIDJSON'] = 'OFF'
         cmake.definitions['OGREDEPS_BUILD_REMOTERY'] = 'OFF'
         cmake.definitions['OGREDEPS_BUILD_SDL2'] = 'OFF'
-        cmake.configure(source_folder="cabalistic-ogredeps-019e46bf5ce0")
+        cmake.configure(source_folder="cabalistic-ogredeps-dbf4f822eb78")
         cmake.build()
 
     def package(self):

@@ -1,7 +1,7 @@
 
 env:
    global:
-     - CONAN_REFERENCE: "OGREdeps/2019-04"
+     - CONAN_REFERENCE: "OGREdeps/20.19.4"
      - CONAN_USERNAME: "anotherfoxguy"
      - CONAN_LOGIN_USERNAME: "anotherfoxguy"
      - CONAN_CHANNEL: "OGREdeps"

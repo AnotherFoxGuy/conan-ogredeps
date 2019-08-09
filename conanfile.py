@@ -3,7 +3,7 @@ from conans.tools import os_info, SystemPackageTool
 
 class OgredepsConan(ConanFile):
     name = "OGREdeps"
-    version = "2019-04"
+    version = "20.19.4"
     url = "https://github.com/AnotherFoxGuy/conan-ogredeps"
     description = "This package is provided as a quick route to compile the core dependencies of OGRE (http://www.ogre3d.org) on most supported platforms."
     settings = "os", "compiler", "build_type", "arch"
@@ -17,9 +17,6 @@ class OgredepsConan(ConanFile):
 
     def source(self):
         tools.get("https://bitbucket.org/cabalistic/ogredeps/get/dbf4f822eb78.zip")
-        tools.replace_in_file("cabalistic-ogredeps-dbf4f822eb78/src/CMakeLists.txt",
-        'if (WIN32 OR (APPLE AND NOT OGRE_BUILD_PLATFORM_APPLE_IOS))',
-        'if (FALSE)')
 
     def build(self):
         cmake = CMake(self)

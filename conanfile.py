@@ -17,6 +17,9 @@ class OgredepsConan(ConanFile):
 
     def source(self):
         tools.get("https://bitbucket.org/cabalistic/ogredeps/get/dbf4f822eb78.zip")
+        tools.replace_in_file("cabalistic-ogredeps-dbf4f822eb78/src/CMakeLists.txt",
+        'if (WIN32 OR (APPLE AND NOT OGRE_BUILD_PLATFORM_APPLE_IOS))',
+        'if (FALSE)')
 
     def build(self):
         cmake = CMake(self)

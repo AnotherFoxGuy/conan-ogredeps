@@ -16,8 +16,8 @@ class OgredepsConan(ConanFile):
                 installer.install("libx11-dev")
 
     def source(self):
-        tools.get("https://bitbucket.org/cabalistic/ogredeps/get/dbf4f822eb78.zip")
-        tools.replace_in_file("cabalistic-ogredeps-dbf4f822eb78/src/CMakeLists.txt",
+        tools.get("https://github.com/AnotherFoxGuy/ogredeps/archive/master.zip")
+        tools.replace_in_file("ogredeps-master/src/CMakeLists.txt",
         'if (WIN32 OR (APPLE AND NOT OGRE_BUILD_PLATFORM_APPLE_IOS))',
         'if (FALSE)')
 
@@ -28,7 +28,7 @@ class OgredepsConan(ConanFile):
         cmake.definitions['OGREDEPS_BUILD_RAPIDJSON'] = 'OFF'
         cmake.definitions['OGREDEPS_BUILD_REMOTERY'] = 'OFF'
         cmake.definitions['OGREDEPS_BUILD_SDL2'] = 'OFF'
-        cmake.configure(source_folder="cabalistic-ogredeps-dbf4f822eb78")
+        cmake.configure(source_folder="ogredeps-master")
         cmake.build()
 
     def package(self):
